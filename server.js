@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config({ path: '.env.local' });
 
 async function mongoConnect() {
   try {
@@ -17,21 +17,21 @@ async function mongoConnect() {
 
 mongoConnect();
 
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-});
+// const userSchema = new mongoose.Schema({
+//   username: String,
+//   password: String,
+// });
 
-const User = mongoose.model('User', userSchema);
+// const User = mongoose.model('User', userSchema);
 
-const user = new User({
-  username: 'test',
-  password: 'test1',
-});
+// const user = new User({
+//   username: 'test',
+//   password: 'test1',
+// });
 
-user.save();
+// user.save();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
