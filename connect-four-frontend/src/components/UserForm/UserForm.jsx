@@ -21,7 +21,7 @@ function UserForm() {
     try {
       const response = await axios.post('http://localhost:3001/users', { username, password });
       console.log(response.data);
-      dispatch({ type: 'USER_SUBMITTED', payload: { username: response.data.username, password: response.data.password } });
+      dispatch({ type: 'SET_CURRENT_USER', payload: { username: response.data.username, password: response.data.password } });
     } catch (error) {
       console.error(error);
     }

@@ -1,20 +1,24 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store/store';
+import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import UserForm from './components/UserForm/UserForm';
 import WelcomePage from './components/WelcomePage/WelcomePage';
+import { setCurrentUser } from './store/user/user.action';
 
-function App() {
+function App({ user }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user) {
+      dispatch(setCurrentUser(user));
+    }
+  }, [dispatch, user]);
+
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<UserForm />} />
-          <Route path="welcome" element={<WelcomePage />} />
-        </Routes>
-      </BrowserRouter>
-    </Provider>
+    <Routes>
+      <Route index element={<UserForm />} />
+      <Route path="welcome" element={<WelcomePage user={user} />} />
+    </Routes>
   );
 }
 
